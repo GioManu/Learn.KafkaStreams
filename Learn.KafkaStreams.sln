@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.KafkaStreams.Task1", "Learn.KafkaStreams.Task1\Learn.KafkaStreams.Task1.csproj", "{F58F16D9-FF6C-4523-B04F-E30301BC3F14}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.KafkaStreams.Shared", "Learn.KafkaStreams.Shared\Learn.KafkaStreams.Shared.csproj", "{8BB07519-AED2-418A-8051-2B554F5D1E0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.KafkaStreams.Task2", "Learn.KafkaStreams.Task2\Learn.KafkaStreams.Task2.csproj", "{061AF13F-8864-4331-8BE8-26686D57A1E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.KafkaStreams.Task3", "Learn.KafkaStreams.Task3\Learn.KafkaStreams.Task3.csproj", "{5A1430F0-A2ED-42F7-911F-7C51E6A65B4C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Learn.KafkaStreams.Task4", "Learn.KafkaStreams.Task4\Learn.KafkaStreams.Task4.csproj", "{63B9AAF8-F13B-4B50-99CF-3B55561F1BE5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F58F16D9-FF6C-4523-B04F-E30301BC3F14}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F58F16D9-FF6C-4523-B04F-E30301BC3F14}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F58F16D9-FF6C-4523-B04F-E30301BC3F14}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F58F16D9-FF6C-4523-B04F-E30301BC3F14}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB07519-AED2-418A-8051-2B554F5D1E0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB07519-AED2-418A-8051-2B554F5D1E0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB07519-AED2-418A-8051-2B554F5D1E0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB07519-AED2-418A-8051-2B554F5D1E0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{061AF13F-8864-4331-8BE8-26686D57A1E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{061AF13F-8864-4331-8BE8-26686D57A1E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{061AF13F-8864-4331-8BE8-26686D57A1E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{061AF13F-8864-4331-8BE8-26686D57A1E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A1430F0-A2ED-42F7-911F-7C51E6A65B4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A1430F0-A2ED-42F7-911F-7C51E6A65B4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A1430F0-A2ED-42F7-911F-7C51E6A65B4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A1430F0-A2ED-42F7-911F-7C51E6A65B4C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63B9AAF8-F13B-4B50-99CF-3B55561F1BE5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63B9AAF8-F13B-4B50-99CF-3B55561F1BE5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63B9AAF8-F13B-4B50-99CF-3B55561F1BE5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63B9AAF8-F13B-4B50-99CF-3B55561F1BE5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D27D64BF-959C-42EA-B5F0-C2172D9292E5}
+	EndGlobalSection
+EndGlobal
