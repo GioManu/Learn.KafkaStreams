@@ -6,23 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static Confluent.Kafka.ConfigPropertyNames;
 
 namespace Learn.KafkaStreams.Shared
 {
-    public class KafkaStreamingProducer(ProducerConfig config, string TopicName)
+    public class KafkaStreamingProducer<TKey, TValue>(ProducerConfig config, params string[] Topics)
     {
         public async Task<int> ProduceMessagesAsync(int start, int end)
         {
-            using var producer = new ProducerBuilder<Null, string>(config).Build();
+            using var producer = new ProducerBuilder<TKey, TValue>(config).Build();
 
             while (start <= end)
             {
-                var message = new Message<Null, string>
-                {
-                    Value = JsonConvert.SerializeObject(new Message($"auto generated message #{start}"))
-                };
-
-                await producer.ProduceAsync(TopicName, message);
+                await ProduceMessages(producer, start);
 
                 start++;
             }
@@ -30,6 +26,21 @@ namespace Learn.KafkaStreams.Shared
             producer.Flush();
 
             return start;
+        }
+        
+        private async Task ProduceMessages(IProducer<TKey, TValue> producer, int itValue)
+        {
+            foreach (var topic in Topics)
+            {
+                var message = GenerateMessage(itValue, topic);
+
+                await producer.ProduceAsync(topic, message);
+            }
+        }
+
+        public virtual Message<TKey, TValue> GenerateMessage(int itValue, string topic)
+        {
+            return new Message<TKey, TValue>();
         }
     }
 }

@@ -5,11 +5,11 @@ using System.Text;
 
 namespace Learn.KafkaStreams.Shared
 {
-    public class JsonSerDes<T> : AbstractSerDes<T> where T : class
+    public class JsonConvertor<T> : AbstractSerDes<T> where T : class
     {
         private readonly Encoding encoding;
 
-        public JsonSerDes()
+        public JsonConvertor()
         {
             encoding = Encoding.UTF8;
         }

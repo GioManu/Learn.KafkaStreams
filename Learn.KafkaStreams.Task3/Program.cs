@@ -14,6 +14,8 @@ await StartStreamAsync();
 
 async Task StartStreamAsync()
 {
+    var kafkaProducer = new Task3KafkaStreamingProducer(KafkaSettingsConstants.ProducerConfig(), configuration.Topics);
+
     var config = new StreamConfig<StringSerDes, StringSerDes>
     {
         ApplicationId = configuration.ApplicationId,
@@ -49,7 +51,7 @@ async Task StartStreamAsync()
 
     while (start < 50)
     {
-        start = await GenerateConsumerTopicMessagesAsync(start, start + 15);
+        start = await kafkaProducer.ProduceMessagesAsync(start, start + 15);
 
         await Task.Delay(10_000);
     }
@@ -82,37 +84,4 @@ async Task StartStreamAsync()
     {
         Console.WriteLine($"Key: {key} - Value: {value}");
     }
-}
-
-async Task<int> GenerateConsumerTopicMessagesAsync(int start, int end)
-{
-    var config = new ProducerConfig
-    {
-        BootstrapServers = configuration.BootstrapServers,
-        Acks = Acks.All,
-        EnableIdempotence = true,
-        MessageSendMaxRetries = int.MaxValue,
-        MessageTimeoutMs = 10_000
-    };
-
-    using var producer = new ProducerBuilder<Null, string>(config).Build();
-
-    while (start <= end)
-    {
-        foreach (var topicName in configuration.Topics)
-        {
-            var message = new Message<Null, string>
-            {
-                Value = $"{start}:{topicName}'s value"
-            };
-
-            await producer.ProduceAsync(topicName, message);
-        }
-
-        start++;
-    }
-
-    producer.Flush();
-
-    return start;
 }

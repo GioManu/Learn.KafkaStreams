@@ -1,6 +1,7 @@
 ﻿using Confluent.Kafka;
 using Confluent.Kafka.Admin;
 using Learn.KafkaStreams.Shared;
+using Learn.KafkaStreams.Task1;
 using Streamiz.Kafka.Net;
 using Streamiz.Kafka.Net.SerDes;
 using System.Text.Json;
@@ -55,7 +56,7 @@ void SubscribeToProducerTopic()
 
 async Task StartStreamAsync()
 {
-    var kafkaProducer = new KafkaStreamingProducer(KafkaSettingsConstants.ProducerConfig(), configuration.ProducerTopic);
+    var kafkaProducer = new Task1KafkaStreamingProducer(KafkaSettingsConstants.ProducerConfig(), configuration.ProducerTopic);
 
     var config = new StreamConfig<StringSerDes, StringSerDes>
     {
@@ -67,8 +68,7 @@ async Task StartStreamAsync()
 
     var builder = new StreamBuilder();
 
-    builder
-        .Stream<string, string>(configuration.ConsumerTopic)
+    builder.Stream<string, string>(configuration.ConsumerTopic)
         .MapValues(Map)
         .To(configuration.ProducerTopic);
 

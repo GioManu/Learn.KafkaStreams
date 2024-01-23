@@ -12,7 +12,7 @@ await StartStreamAsync();
 
 async Task StartStreamAsync()
 {
-    var kafkaStreamingProducer = new KafkaStreamingProducer(KafkaSettingsConstants.ProducerConfig(), configuration.Topic);
+    var kafkaStreamingProducer = new Task2KafkaStreamingProducer(KafkaSettingsConstants.ProducerConfig(), configuration.Topic);
 
     var config = new StreamConfig<StringSerDes, StringSerDes>
     {

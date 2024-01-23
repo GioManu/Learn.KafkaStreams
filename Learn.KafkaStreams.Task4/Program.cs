@@ -1,20 +1,20 @@
-﻿using Confluent.Kafka.Admin;
-using Confluent.Kafka;
+﻿using Confluent.Kafka;
 using Streamiz.Kafka.Net.SerDes;
 using Streamiz.Kafka.Net;
-using Newtonsoft.Json;
 using Learn.KafkaStreams.Shared;
 using Learn.KafkaStreams.Task4;
 
 var appId = KafkaSettingsConstants.AppId("task4");
 
-var configuration = new Configuration(appId, KafkaSettingsConstants.BootStrapServers);
+var configuration = new Task4Configuration(appId, KafkaSettingsConstants.BootStrapServers, KafkaSettingsConstants.Task4Topic1);
 
 await StartStreamAsync();
 
 async Task StartStreamAsync()
 {
-    var config = new StreamConfig<StringSerDes, Learn.KafkaStreams.Shared.JsonSerDes<Employee>>
+    var kafkaProducer = new Task4KafkaStreamingProducer(KafkaSettingsConstants.ProducerConfig(), configuration.Topic);
+
+    var config = new StreamConfig<StringSerDes, Learn.KafkaStreams.Shared.JsonConvertor<Employee>>
     {
         ApplicationId = configuration.ApplicationId,
         BootstrapServers = configuration.BootstrapServers,
@@ -34,7 +34,7 @@ async Task StartStreamAsync()
 
     while (start < 50)
     {
-        start = await GenerateConsumerTopicMessagesAsync(start, start + 15);
+        start = await kafkaProducer.ProduceMessagesAsync(start, start + 15);
 
         await Task.Delay(10_000);
     }
@@ -45,38 +45,6 @@ async Task StartStreamAsync()
     {
         Console.WriteLine(value);
     }
-}
-
-async Task<int> GenerateConsumerTopicMessagesAsync(int start, int end)
-{
-    var config = new ProducerConfig
-    {
-        BootstrapServers = configuration.BootstrapServers,
-        Acks = Acks.All,
-        EnableIdempotence = true,
-        MessageSendMaxRetries = int.MaxValue,
-        MessageTimeoutMs = 10_000
-    };
-
-    using var producer = new ProducerBuilder<Null, string>(config).Build();
-
-    while (start <= end)
-    {
-        var employee = new Employee($"Company-{Guid.NewGuid()}", $"Employee-{Guid.NewGuid()}-Name", $"Position#{start}", (short)start);
-
-        var message = new Message<Null, string>
-        {
-            Value = JsonConvert.SerializeObject(employee)
-        };
-
-        await producer.ProduceAsync(KafkaSettingsConstants.Task4Topic1, message);
-
-        start++;
-    }
-
-    producer.Flush();
-
-    return start;
 }
 
 #region Models
